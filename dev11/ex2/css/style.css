@@ -1,0 +1,233 @@
+* {
+  margin: 10;
+  padding: auto;
+}
+header,
+footer,
+div,
+main {
+  display: block;
+}
+.Header_container {
+  display: inline-flex;
+}
+#logo {
+  color: #3e3f43;
+  font-family: Nunito;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 6px;
+  position: relative;
+  margin-top: 20px;
+
+  text-decoration: none;
+}
+.Header_container nav {
+  margin-left: 419px;
+  margin-top: 20px;
+}
+.Header_container a {
+  color: #612999;
+  font-family: Nunito;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-right: 64px;
+  text-decoration: none;
+}
+.Header_container a:hover {
+  color: #612999;
+  font-family: Nunito;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.Header_container img {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+#Enjoy_img {
+  background-image: url(../images/tasting-room.jpg);
+  width: 100%;
+  height: 797px;
+  flex-shrink: 0;
+}
+#Enjoy_img h1 {
+  color: #612999;
+  font-family: Nunito;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  position: absolute;
+  margin-top: 32px;
+  margin-left: 32px;
+}
+#Enjoy_img p {
+  width: 448px;
+  color: #000;
+  font-family: Nunito;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
+  margin-top: 163px;
+  margin-left: 32px;
+}
+#About h2 {
+  width: 136.443px;
+  height: 40px;
+  flex-shrink: 0;
+  color: #612999;
+  font-family: Rubik;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 100% */
+}
+#About p {
+  width: 100%;
+  height: 85px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: justify;
+  font-family: Rubik;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140.625%; /* 28.125px */
+}
+
+#popular_wines_headline {
+  color: #612999;
+  margin-bottom: 27px;
+  font-family: Rubik;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 100% */
+}
+.card_container {
+  max-width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 287px;
+}
+.wine_card_body {
+  width: 376px;
+  height: 496px;
+  flex-shrink: 0;
+  border-radius: 38px;
+  background: #efecff;
+  box-shadow: 0px 6px 40px 0px rgba(57, 132, 187, 0.05);
+  position: relative;
+  overflow: hidden;
+  margin-right: 32px;
+  margin-top: 32px;
+}
+.wine_card_body h3 {
+  color: #000;
+  text-align: justify;
+  font-family: "Abel";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  align-items: center;
+  position: relative;
+  margin-left: 32px;
+}
+.wine_card_body h4 {
+  position: absolute;
+  top: 366px;
+  margin-left: 32px;
+  color: #612999;
+  text-align: justify;
+  font-family: "Abel";
+  font-size: 35px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+}
+.wine_card_body p {
+  width: 315px;
+  height: 96px;
+  flex-shrink: 0;
+  color: #333;
+  font-family: "Abel";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 7px;
+  margin-left: 32px;
+  position: relative;
+}
+.wine_card_body img {
+  width: 45%;
+  height: 55%;
+
+  border-radius: 10px;
+  margin-left: 100px;
+  position: flex;
+}
+.wine_card_body .heart_img_container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #efecff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wine_card_body .heart_img_container .heart_img {
+  background-image: url(../images/heart\ 2.png);
+  width: 23px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.wine_card_body .ShoppingBag_img_container {
+  position: absolute;
+  bottom: 27px;
+  right: 51px;
+  background-color: #612999;
+  border: none;
+  border-radius: 50%;
+  width: 63px;
+  height: 63px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+.wine_card_body .ShoppingBag_img_container .ShoppingBag_img {
+  background-image: url(../images/shopping-basket\ 2.png);
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+}
+footer {
+  width: 100%;
+  background: #efecff;
+  height: 287px;
+  position:sticky;
+  bottom: 0;
+  left: 0;
+}
