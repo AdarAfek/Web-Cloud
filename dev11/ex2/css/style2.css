@@ -123,6 +123,65 @@ main {
   height: 42.385px;
   flex-shrink: 0;
 }
+.form_Free_content {
+  position: absolute;
+  left: 750px;
+  justify-content: space-between;
+  border-radius: 5px;
+  background: #efecff;
+  padding: 20px;
+  align-items: center;
+}
+.form_Free_content h2 {
+  width: 275px;
+  display: block;
+  color: #612999;
+  font-family: Rubik;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 100% */
+  position: absolute;
+margin-bottom: 30px;
+  bottom: 230px;
+}
+label {
+  color: #000;
+  font-family: Rubik;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 58.333% */
+}
+
+input[type="submit"] {
+  width: 100%;
+  font-size: 22px;
+  background: ffffff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[ type="text"]{
+  color: #000;
+  font-family: Rubik;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 58.333% */
+}
+input[value]{
+  color: #000;
+  font-family: Rubik;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 58.333% */
+  opacity: 70%;
+}
 
 footer {
   position: fixed;
@@ -133,6 +192,7 @@ footer {
   background: #efecff;
   box-shadow: 0px 6px 40px rgba(57, 132, 187, 0.05);
   border-top: 1px solid #e5e5e5;
+  z-index: -1;
 }
 .Footer_table {
   display: flex;
