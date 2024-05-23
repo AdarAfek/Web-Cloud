@@ -28,7 +28,7 @@ main {
   text-decoration: none;
 }
 .Header_container nav {
-  margin-left: 419px;
+  margin-left: 135px;
   margin-top: 20px;
 }
 .Header_container a {
@@ -49,7 +49,7 @@ main {
   font-weight: 700;
   line-height: normal;
 }
-.Header_container  #Home {
+.Header_container #Home {
   color: #612999;
   font-family: Nunito;
   font-size: 30px;
@@ -93,6 +93,7 @@ main {
   margin-top: 163px;
   margin-left: 32px;
 }
+
 #About h2 {
   width: 136.443px;
   height: 40px;
@@ -117,6 +118,10 @@ main {
   line-height: 140.625%; /* 28.125px */
 }
 
+#list_wines {
+  padding-top: 39px;
+}
+
 #popular_wines_headline {
   color: #612999;
   margin-bottom: 27px;
@@ -130,7 +135,7 @@ main {
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom:32px;
+  margin-bottom: 32px;
   align-content: center;
 }
 .wine_card_body {
@@ -141,7 +146,7 @@ main {
   background: #efecff;
   box-shadow: 0px 6px 40px 0px rgba(57, 132, 187, 0.05);
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-right: 32px;
   margin-top: 32px;
 }
@@ -291,6 +296,7 @@ footer {
   line-height: normal;
   text-decoration: none;
   font-family: "Nunito";
+  margin-bottom: 8px;
 }
 .Footer_table .Right_cuolumn ul > li > a {
   color: #333;
@@ -300,6 +306,7 @@ footer {
   line-height: normal;
   text-decoration: none;
   font-family: "Nunito";
+  margin-bottom: 8px;
 }
 
 .copy {
