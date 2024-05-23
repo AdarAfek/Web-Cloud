@@ -128,10 +128,11 @@ main {
   line-height: 40px; /* 100% */
 }
 .card_container {
-  max-width: 50%;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 287px;
+  margin-bottom:32px;
+  align-content: center;
 }
 .wine_card_body {
   width: 376px;
