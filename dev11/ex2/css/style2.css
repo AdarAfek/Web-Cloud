@@ -4,7 +4,6 @@
 }
 header,
 footer,
-div,
 main {
   display: block;
 }
@@ -134,7 +133,7 @@ main {
   margin-left: 32px;
   margin-bottom: 32px;
 }
-h2 {
+h2{
   position: relative;
   width: 260px;
   height: 40px;
@@ -148,7 +147,6 @@ h2 {
   margin-top: 32px;
   margin-left: 32px;
 }
-
 .form_Free_content form {
   width: 1000px;
   height: 450px;
@@ -158,15 +156,15 @@ h2 {
   margin-bottom: 32px;
   flex-wrap: wrap;
 }
-.form_Free_content .form_div{
+.form_Free_content .form_div {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom:32px;
+  margin-bottom: 32px;
   align-content: center;
-  margin-left:300px;  
-  margin-top:32px ;
-  margin-bottom:32px;
+  margin-left: 300px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 .form_Free_content form label {
   width: 70%;
@@ -178,7 +176,6 @@ h2 {
   line-height: 16px;
   margin-bottom: 20px;
 }
-
 .form_Free_content form input {
   width: 70%;
   font-size: 40px;
@@ -189,11 +186,6 @@ h2 {
   cursor: pointer;
   margin-bottom: 20px;
 }
-
-
-
-
-
 footer {
   position: sticky;
   bottom: 0;
@@ -241,7 +233,6 @@ footer {
 .Footer_table a {
   text-decoration: none;
 }
-
 .Footer_table .left_cuolumn ul > li > a {
   color: #333;
   font-size: 16px;
@@ -260,7 +251,6 @@ footer {
   text-decoration: none;
   font-family: "Nunito";
 }
-
 .copy {
   width: 198px;
   height: 18px;
