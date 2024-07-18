@@ -1,7 +1,13 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
-const Vactions = require('./data/books.json');
+const db = require("./dbconeection");
+async function dbinit() {
+  await db.createConnection();
+  await db.initialize();
+  await db.closeConnection();
+}
+dbinit();
 app.use((req, res, next) => {
  res.set({
  'Access-Control-Allow-Origin': '*',
