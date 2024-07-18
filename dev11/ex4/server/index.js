@@ -19,16 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //User routes
 const { userRouter } = require("./routers/usersRouter");
-app.use("/api/user",userRouter);
-
-
-
-
-
-
-
-
-
+app.use("/api/user", userRouter);
+// preference routes
+const { preferenceRouter } = require("./routers/preferencesRouter");
+app.use("/api/preference", preferenceRouter);
 
 app.listen(port);
 console.log(`listening on port ${port}`);
