@@ -1,6 +1,7 @@
+let connection;
 async function createConnection() {
   const mysql = require("mysql2/promise");
-  const connection = await mysql.createConnection({
+ connection = await mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -13,9 +14,13 @@ async function closeConnection(connection) {
   if (connection) {
     await connection.end();
   }
+};
+const getConnection =()=> {
+  if (connection)
+  return connection;
 }
-
 module.exports = {
   createConnection,
   closeConnection,
+  getConnection,
 };
