@@ -37,13 +37,7 @@ const verifyAccessToken = async (accessToken) => {
   );
   return rows[0].userId;
 };
-const addPreferences = async (
-  accessToken,
-  startDate,
-  endDate,
-  destination,
-  vacationType
-) => {
+const addPreferences = async (req, res) => {
   try {
     const { destination, startDate, endDate, accessToken, vacationType } =
       req.body;
@@ -56,36 +50,42 @@ const addPreferences = async (
     ) {
       throw new Error("Missing fields");
     }
+
     const userId = await verifyAccessToken(accessToken);
-    if (!userId) throw new Error(`Invalid Access Token`);
+    if (!userId) {
+      return res.status(401).json({ error: "Invalid Access Token" });
+    }
 
     if (!destinationValid(destination)) {
-      throw new Error(
-        `Invalid destination: ${destination}. Valid destinations: ${destinations.join(
+      return res.status(400).json({
+        error: `Invalid destination: ${destination}. Valid destinations: ${destinations.join(
           ", "
-        )}`
-      );
+        )}`,
+      });
     }
+
     if (!typesOfVacationValid(vacationType)) {
-      throw new Error(
-        `Invalid vacation type key: ${vacationType}. Valid vacation types: ${typesOfVacation.join(
-          ", "
-        )}`
-      );
+      return res.status(400).json({
+        error: `Invalid vacation type key: ${vacationType}. Valid vacation types: ${Object.values(
+          typesOfVacation
+        ).join(", ")}`,
+      });
     }
+
     const connection = await db.createConnection();
     const [result] = await connection.execute(
       "INSERT INTO user_preferences (user_id, start_date, end_date, destination, vacation_type) VALUES (?, ?, ?, ?, ?)",
       [userId, startDate, endDate, destination, vacationType]
     );
     await db.closeConnection();
-    return result.insertId;
+
+    res.status(200).json({ insertId: result.insertId });
   } catch (error) {
-    throw new Error(`Failed to add preferences: ${error.message}`);
+    res
+      .status(500)
+      .json({ error: `Failed to add preferences: ${error.message}` });
   }
 };
 
-module.exports = {
-    addPreferences
-  };
-  
+module.exports = { addPreferences };
+
