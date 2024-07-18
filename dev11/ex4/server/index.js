@@ -5,7 +5,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 const db = require("./db");
 const dbconnect = db.createConnection;
-app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.set({
     "Access-Control-Allow-Origin": "*",

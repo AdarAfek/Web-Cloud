@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const { userController } = require("../controllers/userController");
-const userRouter = new Router();
+const { registerNewUser,loginUser } = require("../controllers/userController"); // Corrected import
+const userRouter = Router(); // Use Router() directly
 
-userRouter.post('/register',);
+userRouter.post("/register", registerNewUser);
 
-module.exports = { userRouter };
+module.exports = {userRouter};
