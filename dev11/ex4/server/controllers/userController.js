@@ -1,4 +1,4 @@
-const { clear } = require("console");
+
 const db = require("../db");
 const crypto = require("crypto");
 const generateAccessCode = () => crypto.randomBytes(32).toString("hex");
