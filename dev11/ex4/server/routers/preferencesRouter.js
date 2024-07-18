@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const {  } = require("../controllers/preferenceController"); // Corrected import
+const { addPreferences } = require("../controllers/preferenceController"); // Corrected import
 const preferenceRouter = Router(); // Use Router() directly
 
-preferenceRouter.
+preferenceRouter.post("/",addPreferences);
 module.exports = {preferenceRouter};
