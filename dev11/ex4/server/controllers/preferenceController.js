@@ -3,7 +3,7 @@ const destinations = [
   "Rome",
   "Berlin",
   "New York City",
-  "Los Angles",
+  "Los Angeles",
   "Madrid",
   "London",
   "Athens",
@@ -18,18 +18,14 @@ const typesOfVacation = {
   4: "Relax",
   5: "Road trip",
 };
-const typeKeys= object.keys(typesOfVacation).map(key=> parseInt(key)).filter(key=>!isNaN(key));
+const typeKeys = Object.keys(typesOfVacation)
+  .map((key) => parseInt(key))
+  .filter((key) => !isNaN(key));
 
-const destinationValid = (dest)=>{
-    if(destinations.includes(dest)){
-        return true;
-    }
-    else return false;
-}
+const destinationValid = (dest) => {
+  return destinations.includes(dest);
+};
 
-const typesOfVacationValid = (key)=>{
-    if(typeKeys.includes(key)){
-        return true;
-    }
-    else return false;
-}
+const typesOfVacationValid = (key) => {
+  return typeKeys.includes(key);
+};
