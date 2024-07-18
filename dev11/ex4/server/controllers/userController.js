@@ -10,12 +10,12 @@ async function registerNewUser(req, res) {
   }
 
   try {
-    const connection = await db.createConnection(); // Await for connection creation
+    const connection = await db.createConnection(); 
     await connection.execute(
       "INSERT INTO tbl_11_users (username, password, access_code) VALUES (?, ?, ?)",
       [username, password, generateAccessCode()]
     );
-    await db.closeConnection(); // Await for closing connection
+    await db.closeConnection(); 
     res.json({ success: true });
   } catch (err) {
     console.error("Failed to register user:", err);
