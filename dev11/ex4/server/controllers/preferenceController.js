@@ -91,16 +91,27 @@ const updatePreference = async (req, res) => {
     }
     const connection = await db.createConnection();
     const [result] = await connection.execute(
-        "UPDATE tbl_11_preferences SET destination = ?, start_date = ?, end_date = ?, type = ? WHERE preference_id= ?",
-        [destination, startDate, endDate, vacationType, preferenceId]
+      "UPDATE tbl_11_preferences SET destination = ?, start_date = ?, end_date = ?, type = ? WHERE preference_id= ?",
+      [destination, startDate, endDate, vacationType, preferenceId]
     );
     await db.closeConnection();
-    
-    res.status(200).json({ preferenceId});
+
+    res.status(200).json({ preferenceId });
   } catch (error) {
     res
       .status(500)
       .json({ error: `Failed to update preferences: ${error.message}` });
+  }
+};
+const getPreferences = async (req, res) => {
+  try {
+    const connection = await db.createConnection();
+    const [allPreferences] = await connection.execute(
+      "select * from tbl_11_preferences "
+    );
+    return res.status(200).json(allPreferences);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -154,4 +165,4 @@ const addPreference = async (req, res) => {
   }
 };
 
-module.exports = { addPreference,updatePreference };
+module.exports = { addPreference, updatePreference, getPreferences };
