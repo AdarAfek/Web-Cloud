@@ -173,31 +173,28 @@ const mostFrequentlyType = async () => {
        ORDER BY COUNT(type) DESC, type ASC 
        LIMIT 1`
     );
-    return result.length > 0 ? result[0] : null;
+    return result.length > 0 ? result[0].type: null;
   } catch (error) {
     console.error("Error fetching the most frequently occurring type:", error);
-  } finally {
-    await connection.end();
-  }
+  } 
 };
 const mostFrequentlyDest = async () => {
   const connection = await db.createConnection();
   try {
     const [result] = await connection.execute(
-      `SELECT dest FROM tbl_11_preferences 
-       GROUP BY dest 
-       ORDER BY COUNT(dest) DESC, dest ASC 
+      `SELECT destination FROM tbl_11_preferences 
+       GROUP BY destination
+       ORDER BY COUNT(destination) DESC, destination ASC 
        LIMIT 1`
     );
-    return result.length > 0 ? result[0] : null;
+    return result.length > 0 ? result[0].destination : null;
+
   } catch (error) {
     console.error(
       "Error fetching the most frequently occurring destination:",
       error
     );
-  } finally {
-    await connection.end();
-  }
+  } 
 };
 const chosenDates = (preferences) => {
   const dates = preferences.map((date) => ({
@@ -217,39 +214,49 @@ const chosenDates = (preferences) => {
   } else return null;
 };
 const chosenVacation = async (req, res) => {
-  const connection = await db.createConnection();
-  const [allPreferences] = await connection.execute(
-    "select * from tbl_11_preferences "
-  );
+  try {
+    const connection = await db.createConnection();
+    const [allPreferences] = await connection.execute(
+      "select * from tbl_11_preferences "
+    );
 
-  if (allPreferences.length === 0) {
-    res.status(400).json({ message: "No preferences found" });
-    return;
-  }
+    if (allPreferences.length === 0) {
+      res.status(400).json({ message: "No preferences found" });
+      return;
+    }
 
-  if (allPreferences.length < 5) {
-    res
-      .status(400)
-      .json({ message: "Not enough preferences to calculate (need 5)" });
-    return;
-  }
-  const chosenDest = mostFrequentlyDest();
-  const chosenType = mostFrequentlyType();
-  const dates = chosenDates(allPreferences);
-  if (!dates || !chosenDest || !chosenType) {
-    const defaultVacation = allPreferences[0];
-    res.status(400).json({
-      message:
-        "default Vacation selected since no overlapping dates or chosen type or chosen destination was found.",
-      defaultVacation,
+    if (allPreferences.length < 5) {
+      res
+        .status(400)
+        .json({ message: "Not enough preferences to calculate (need 5)" });
+      return;
+    }
+  
+    const chosenDest = await mostFrequentlyDest();
+    let chosenType = await mostFrequentlyType();
+    chosenType=parseInt(chosenType,10);
+  
+    chosenType=typesOfVacation[chosenType];
+    
+    const dates = chosenDates(allPreferences);
+    if (!dates || !chosenDest || !chosenType) {
+      const defaultVacation = allPreferences[0];
+      res.status(400).json({
+        message:
+          "default Vacation selected since no overlapping dates or chosen type or chosen destination was found.",
+        defaultVacation,
+      });
+      return;
+    }
+    res.status(200).json({
+      chosenDest,
+      chosenType,
+      dates,
     });
-    return;
+  } catch (error) {
+    console.error("Error processing vacation data:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-  res.status(200).json({
-    chosenDest,
-    chosenType,
-    dates,
-  });
 };
 module.exports = {
   addPreference,
