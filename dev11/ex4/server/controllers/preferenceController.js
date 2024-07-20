@@ -164,5 +164,96 @@ const addPreference = async (req, res) => {
       .json({ error: `Failed to add preferences: ${error.message}` });
   }
 };
+const mostFrequentlyType = async () => {
+  const connection = await db.createConnection();
+  try {
+    const [result] = await connection.execute(
+      `SELECT type FROM tbl_11_preferences 
+       GROUP BY type 
+       ORDER BY COUNT(type) DESC, type ASC 
+       LIMIT 1`
+    );
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("Error fetching the most frequently occurring type:", error);
+  } finally {
+    await connection.end();
+  }
+};
+const mostFrequentlyDest = async () => {
+  const connection = await db.createConnection();
+  try {
+    const [result] = await connection.execute(
+      `SELECT dest FROM tbl_11_preferences 
+       GROUP BY dest 
+       ORDER BY COUNT(dest) DESC, dest ASC 
+       LIMIT 1`
+    );
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error(
+      "Error fetching the most frequently occurring destination:",
+      error
+    );
+  } finally {
+    await connection.end();
+  }
+};
+const chosenDates = (preferences) => {
+  const dates = preferences.map((date) => ({
+    startDate: new Date(date.start_date),
+    endDate: new Date(date.end_date),
+  }));
+  if (dates.length === 0) return null;
 
-module.exports = { addPreference, updatePreference, getPreferences };
+  let chosenStartDate = new Date(
+    Math.max(...dates.map((vacation) => vacation.startDate.getTime()))
+  );
+  let chosenEndDate = new Date(
+    Math.min(...dates.map((vacation) => vacation.endDate.getTime()))
+  );
+  if (chosenStartDate < chosenEndDate) {
+    return { start_date: chosenStartDate, end_date: chosenEndDate };
+  } else return null;
+};
+const chosenVacation = async (req, res) => {
+  const connection = await db.createConnection();
+  const [allPreferences] = await connection.execute(
+    "select * from tbl_11_preferences "
+  );
+
+  if (allPreferences.length === 0) {
+    res.status(400).json({ message: "No preferences found" });
+    return;
+  }
+
+  if (allPreferences.length < 5) {
+    res
+      .status(400)
+      .json({ message: "Not enough preferences to calculate (need 5)" });
+    return;
+  }
+  const chosenDest = mostFrequentlyDest();
+  const chosenType = mostFrequentlyType();
+  const dates = chosenDates(allPreferences);
+  if (!dates || !chosenDest || !chosenType) {
+    const defaultVacation = allPreferences[0];
+    res.status(400).json({
+      message:
+        "default Vacation selected since no overlapping dates or chosen type or chosen destination was found.",
+      defaultVacation,
+    });
+    return;
+  }
+  res.status(200).json({
+    chosenDest,
+    chosenType,
+    dates,
+  });
+};
+module.exports = {
+  addPreference,
+  updatePreference,
+  getPreferences,
+  chosenVacation,
+};
