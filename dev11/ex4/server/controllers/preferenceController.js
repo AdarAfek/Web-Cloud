@@ -173,10 +173,10 @@ const mostFrequentlyType = async () => {
        ORDER BY COUNT(type) DESC, type ASC 
        LIMIT 1`
     );
-    return result.length > 0 ? result[0].type: null;
+    return result.length > 0 ? result[0].type : null;
   } catch (error) {
     console.error("Error fetching the most frequently occurring type:", error);
-  } 
+  }
 };
 const mostFrequentlyDest = async () => {
   const connection = await db.createConnection();
@@ -188,13 +188,12 @@ const mostFrequentlyDest = async () => {
        LIMIT 1`
     );
     return result.length > 0 ? result[0].destination : null;
-
   } catch (error) {
     console.error(
       "Error fetching the most frequently occurring destination:",
       error
     );
-  } 
+  }
 };
 const chosenDates = (preferences) => {
   const dates = preferences.map((date) => ({
@@ -231,14 +230,17 @@ const chosenVacation = async (req, res) => {
         .json({ message: "Not enough preferences to calculate (need 5)" });
       return;
     }
-  
+
     const chosenDest = await mostFrequentlyDest();
     let chosenType = await mostFrequentlyType();
-    chosenType=parseInt(chosenType,10);
-  
-    chosenType=typesOfVacation[chosenType];
-    
+    chosenType = parseInt(chosenType, 10);
+
+    chosenType = typesOfVacation[chosenType];
+
     const dates = chosenDates(allPreferences);
+    startingDate = dates.start_date;
+    endingDate = dates.end_date;
+
     if (!dates || !chosenDest || !chosenType) {
       const defaultVacation = allPreferences[0];
       res.status(400).json({
@@ -251,7 +253,8 @@ const chosenVacation = async (req, res) => {
     res.status(200).json({
       chosenDest,
       chosenType,
-      dates,
+      startingDate,
+      endingDate,
     });
   } catch (error) {
     console.error("Error processing vacation data:", error);
